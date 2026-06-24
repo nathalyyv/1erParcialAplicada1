@@ -24,22 +24,27 @@ function Visitante() {
         .from("visitantes")
         .select("*")
 
-      if(!error){
-        setVisitante(data)
-      };
-    }
+      if (error) {
+        console.log(error);
+        alert(error.message);
+        return;
+      }
+
+      setVisitante(data);
+    };
 
     const agregarVisitante = async()=>{
+      const {data, error} =
       await supabase
       .from("visitantes")
       .insert([
         {
-          nombre: nombre,
-          cedula: cedula,
-          telefono: telefono,
-          correo: correo,
-          motivo_visita: motivo_visita,
-          fecha_visita: fecha_visita
+          nombre,
+          cedula,
+          telefono,
+          correo,
+          motivo_visita,
+          fecha_visita
         }
       ]);
          setNombre("");

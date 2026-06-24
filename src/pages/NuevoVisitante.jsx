@@ -14,19 +14,24 @@ function NuevoVisitante() {
   const guardar = async (e) => {
     e.preventDefault();
     const{error} = 
-
     await supabase
       .from("visitantes")
       .insert([
         {
-          nombre: nombre,
-          cedula: cedula,
-          telefono: telefono,
-          correro: correo,
-          motivo_visita: motivo_visita,
-          fecha_visita: fecha_visita
+          nombre,
+          cedula,
+          telefono,
+          correo,
+          motivo_visita,
+          fecha_visita
         }
-      ])
+      ]);
+
+    if (error) {
+      console.log(error);
+      alert(error.message);
+      return;
+    }
 
     
          setNombre("");
@@ -117,6 +122,7 @@ function NuevoVisitante() {
           </label>
 
           <input
+            type="date"
             className="form-control"
             value={fecha_visita}
             onChange={(e) =>
